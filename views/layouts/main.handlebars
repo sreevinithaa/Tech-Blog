@@ -1,0 +1,38 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tech Blog</title>
+    <link rel="stylesheet" href="/css/boostrap.min.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+
+    <header>
+      <h1>
+
+        <a href="/">Tech Blog</a>
+      </h1>
+
+      <nav class="navbar navbar-dark bg-dark">
+        {{#if logged_in}}
+          <a class="nav-item nav-link" href="/profile">profile</a>
+          |
+          <button class="nav-item nav-link" id="logout">logout</button>
+        {{else}}
+          <a class="nav-item nav-link" href="/login">login</a>
+        {{/if}}
+
+      </nav>
+    </header>
+    <main class="container container-fluid mt-5">
+      <!-- Render the sub layout -->
+      {{{body}}}
+    </main>
+    <footer>
+
+    </footer>
+    <footer></footer>
+  </body>
+</html>

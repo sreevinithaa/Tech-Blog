@@ -15,7 +15,7 @@ Blog.init(
         allowNull: false,
       },
       content: {
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT,
         allowNull: false,
         
       },
@@ -39,7 +39,7 @@ Blog.init(
       timestamps: false,
       freezeTableName: true,
       underscored: true,
-      modelName: 'user',
+      modelName: 'blog',
     }
   );
   
