@@ -17,28 +17,28 @@
 
     <header>
 
-      <nav class="navbar navbar-dark bg-dark text-light p-3">
+      <nav class="navbar navbar-dark bgcolor_1 text-light p-3">
         <h1><span class="badge badge-light">Teck Blog</span></h1>
         <ul class="nav justify-content-end">
           {{#if logged_in}}
            <li class="nav-item">
-              <a class="nav-link text-light" href="#">Home</a>
+              <a class="nav-link text-light" href="/">Home</a>
             </li>
               <li class="nav-item">
-              <a class="nav-link text-light" href="#">Dashboard</a>
+              <a class="nav-link text-light" href="/dashboard">Dashboard</a>
             </li>
 
             <li class="nav-item">
-              <a class="nav-link text-light" id="logout">logout</a>
+              <a class="nav-link text-light" href="/logout">logout</a>
             </li>
 
           {{else}}
             <li class="nav-item">
-              <a class="nav-link text-light" href="#">Home</a>
+              <a class="nav-link text-light" href="/">Home</a>
             </li>
              
             <li class="nav-item">
-              <a class="nav-link text-light" href="#">Login</a>
+              <a class="nav-link text-light" href="/login">Login</a>
             </li>
           {{/if}}
         </ul>

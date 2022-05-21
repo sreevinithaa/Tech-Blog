@@ -16,10 +16,8 @@ Comment.init(
         allowNull: false,
         
       },
-      created_date: {
-        type: DataTypes.DATE,
-        allowNull: false,
-      
+      created_at:{
+        type: DataTypes.DATE
       },
       created_by: {
         type: DataTypes.INTEGER,
@@ -33,7 +31,7 @@ Comment.init(
     {
      
       sequelize,
-      timestamps: false,
+      timestamps: true,
       freezeTableName: true,
       underscored: true,
       modelName: 'comment',

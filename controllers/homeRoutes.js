@@ -2,7 +2,7 @@ const router = require('express').Router();
 const { Comment,Blog, User } = require('../models');
 const withAuth = require('../utils/auth');
 
-router.get('/', withAuth, async (req, res) => {
+router.get('/',  async (req, res) => {
     try {
       // Get all blog and JOIN with user data
       const blogData = await Blog.findAll({
@@ -16,7 +16,7 @@ router.get('/', withAuth, async (req, res) => {
   
       // Serialize data so the template can read it
       const blogs = blogData.map((blog) => blog.get({ plain: true }));
-  console.log(blogs);
+     
       // Pass serialized data and session flag into template
       res.render('home', { 
         blogs, 
@@ -26,7 +26,34 @@ router.get('/', withAuth, async (req, res) => {
       res.status(500).json(err);
     }
   });
+  router.get('/dashboard',withAuth,  async (req, res) => {
+    try {
+      // Get all blog and JOIN with user data
+      const blogData = await Blog.findAll({
+        where: {
+            created_by: req.session.user_id
+          },
+        include: [
+          {
+            model: User,
+            attributes: ['name'],
+          },
+
+        ],
+      });
   
+      // Serialize data so the template can read it
+      const blogs = blogData.map((blog) => blog.get({ plain: true }));
+ 
+      // Pass serialized data and session flag into template
+      res.render('dashboard', { 
+        blogs, 
+        logged_in: req.session.logged_in 
+      });
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  });
 
 router.get('/login', (req, res) => {
   // If the user is already logged in, redirect the request to another route
@@ -37,5 +64,15 @@ router.get('/login', (req, res) => {
 
   res.render('login');
 });
-
+router.get('/logout', (req, res) => {
+    // If the user is already logged in, redirect the request to another route
+    if (req.session.logged_in) {
+        req.session.destroy(() => {
+            res.redirect('/');
+        });
+      }
+  
+   
+  });
+  
 module.exports = router;

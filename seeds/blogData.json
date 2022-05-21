@@ -1,17 +1,14 @@
 [
   {
     "title": "Securing JavaScript applications with the Web Cryptography API",
-    "content": "As software becomes more modular in nature, the need to secure web applications is growing. Cryptography is becoming more important in modern application development, with numerous use cases, whether it’s end-to-end encryption in a messaging application, an authentication schema for online banking, or a proof of integrity for critical data.",
-    "created_date": "01/02/2022"
+    "content": "As software becomes more modular in nature, the need to secure web applications is growing. Cryptography is becoming more important in modern application development, with numerous use cases, whether it’s end-to-end encryption in a messaging application, an authentication schema for online banking, or a proof of integrity for critical data."
   },
   {
     "title": "Explore Node.js core dumps using the llnode plugin for lldb",
-    "content": "This article is a primer for developers who are interested in using core dumps to help them debug Node.js problems. If you are a C/C++ developer who is comfortable with core dumps, ulimits, gcore and debuggers, then you are probably comfortable with using core dumps. Being able to integrate JavaScript debugging with C/C++ may be useful if you are working on native npm modulues or other C/C++ code that interacts with JavaScript. If you’re a pure Node.js developer wondering if using core dumps is something you should care about or be aware of in case of an emergency, then hopefully this article will provide a starting place",
-    "created_date": "01/02/2022"
+    "content": "This article is a primer for developers who are interested in using core dumps to help them debug Node.js problems. If you are a C/C++ developer who is comfortable with core dumps, ulimits, gcore and debuggers, then you are probably comfortable with using core dumps. Being able to integrate JavaScript debugging with C/C++ may be useful if you are working on native npm modulues or other C/C++ code that interacts with JavaScript. If you’re a pure Node.js developer wondering if using core dumps is something you should care about or be aware of in case of an emergency, then hopefully this article will provide a starting place"
   },
   {
     "title": "Dissecting React Native",
-    "content": "One of the popular frameworks for cross-platform mobile application development is React Native. This article provides an overview to React Native, with pointers to existing resources and some suggested best practices for writing your own React Native mobile app.",
-    "created_date": "01/02/2022"
+    "content": "One of the popular frameworks for cross-platform mobile application development is React Native. This article provides an overview to React Native, with pointers to existing resources and some suggested best practices for writing your own React Native mobile app."
   }
 ]
