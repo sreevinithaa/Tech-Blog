@@ -11,17 +11,19 @@ const seedDatabase = async () => {
     individualHooks: true,
     returning: true,
   });
-
+var blogarray=[];
   for (const blog of blogData) {
-    await Blog.create({
+    const blog1= await Blog.create({
       ...blog,
       created_by: users[Math.floor(Math.random() * users.length)].id,
     });
+    blogarray.push(blog1);
   }
   for (const comment of commentData) {
     await Comment.create({
       ...comment,
       created_by: users[Math.floor(Math.random() * users.length)].id,
+      blog_id:blogarray[Math.floor(Math.random() * users.length)].id
     });
   }
 

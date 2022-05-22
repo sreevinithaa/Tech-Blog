@@ -16,9 +16,13 @@ Comment.init(
         allowNull: false,
         
       },
-      created_at:{
-        type: DataTypes.DATE
-      },
+    blog_id:{
+      type: DataTypes.INTEGER,
+      references: {
+          model: 'blog',
+          key: 'id',
+        },
+    },
       created_by: {
         type: DataTypes.INTEGER,
         references: {

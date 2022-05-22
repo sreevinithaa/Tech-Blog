@@ -1,78 +1,117 @@
-const router = require('express').Router();
-const { Comment,Blog, User } = require('../models');
-const withAuth = require('../utils/auth');
+const router = require("express").Router();
+const { Comment, Blog, User } = require("../models");
+const withAuth = require("../utils/auth");
 
-router.get('/',  async (req, res) => {
+router.get("/", async (req, res) => {
+  try {
+    // Get all blog and JOIN with user data
+    const blogData = await Blog.findAll({
+      include: [
+        {
+          model: User,
+          attributes: ["name"],
+        },
+      ],
+    });
+
+    // Serialize data so the template can read it
+    const blogs = blogData.map((blog) => blog.get({ plain: true }));
+
+    // Pass serialized data and session flag into template
+    res.render("home", {
+      blogs,
+      logged_in: req.session.logged_in,
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+// GET one gallery
+// Use the custom middleware before allowing the user to access the gallery
+router.get("/blog/:id", async (req, res) => {
+  try {
+    const dbblogData = await Blog.findByPk(req.params.id, {
+      include: [
+        {
+          model: User,
+          attributes: ["name"],
+        },
+        {
+          model: Comment,
+          attributes: ["id", "comment_content", "created_at", "created_by"],
+          include:[{model:User, attributes: ["name"]}]
+        },
+      ],
+    });
+
+    const blog = dbblogData.get({ plain: true });
+    res.render("blog", { blog, logged_in: req.session.logged_in });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
+
+// GET one gallery
+// Use the custom middleware before allowing the user to access the gallery
+router.get("/addcomment/:id", async (req, res) => {
     try {
-      // Get all blog and JOIN with user data
-      const blogData = await Blog.findAll({
-        include: [
-          {
-            model: User,
-            attributes: ['name'],
-          },
-        ],
-      });
-  
-      // Serialize data so the template can read it
-      const blogs = blogData.map((blog) => blog.get({ plain: true }));
-     
-      // Pass serialized data and session flag into template
-      res.render('home', { 
-        blogs, 
-        logged_in: req.session.logged_in 
-      });
+     var comment=new Comment();
+     comment.blog_id=req.params.id;
+     console.log(req.params.id);
+           res.render("comment", { blog_id:req.params.id, logged_in: req.session.logged_in });
     } catch (err) {
+      console.log(err);
       res.status(500).json(err);
     }
   });
-  router.get('/dashboard',withAuth,  async (req, res) => {
-    try {
-      // Get all blog and JOIN with user data
-      const blogData = await Blog.findAll({
-        where: {
-            created_by: req.session.user_id
-          },
-        include: [
-          {
-            model: User,
-            attributes: ['name'],
-          },
-
-        ],
-      });
   
-      // Serialize data so the template can read it
-      const blogs = blogData.map((blog) => blog.get({ plain: true }));
- 
-      // Pass serialized data and session flag into template
-      res.render('dashboard', { 
-        blogs, 
-        logged_in: req.session.logged_in 
-      });
-    } catch (err) {
-      res.status(500).json(err);
-    }
-  });
 
-router.get('/login', (req, res) => {
+router.get("/dashboard", withAuth, async (req, res) => {
+  try {
+    // Get all blog and JOIN with user data
+    const blogData = await Blog.findAll({
+      where: {
+        created_by: req.session.user_id,
+      },
+      include: [
+        {
+          model: User,
+          attributes: ["name"],
+        },
+      ],
+    });
+
+    // Serialize data so the template can read it
+    const blogs = blogData.map((blog) => blog.get({ plain: true }));
+
+    // Pass serialized data and session flag into template
+    res.render("dashboard", {
+      blogs,
+      logged_in: req.session.logged_in,
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.get("/login", (req, res) => {
   // If the user is already logged in, redirect the request to another route
   if (req.session.logged_in) {
-    res.redirect('/');
+    res.redirect("/");
     return;
   }
 
-  res.render('login');
+  res.render("login");
 });
-router.get('/logout', (req, res) => {
-    // If the user is already logged in, redirect the request to another route
-    if (req.session.logged_in) {
-        req.session.destroy(() => {
-            res.redirect('/');
-        });
-      }
-  
-   
-  });
-  
+router.get("/logout", (req, res) => {
+  // If the user is already logged in, redirect the request to another route
+  if (req.session.logged_in) {
+    req.session.destroy(() => {
+      res.redirect("/");
+    });
+  }
+});
+
 module.exports = router;
