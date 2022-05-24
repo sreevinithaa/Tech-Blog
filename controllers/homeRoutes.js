@@ -40,13 +40,13 @@ router.get("/blog/:id", async (req, res) => {
         {
           model: Comment,
           attributes: ["id", "comment_content", "created_at", "created_by"],
-          include:[{model:User, attributes: ["name"]}]
+          include: [{ model: User, attributes: ["name"] }],
         },
       ],
     });
-
+    const isEdit = dbblogData.created_by == req.session.user_id;
     const blog = dbblogData.get({ plain: true });
-    res.render("blog", { blog, logged_in: req.session.logged_in });
+    res.render("blog", { blog, isEdit, logged_in: req.session.logged_in });
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
@@ -56,27 +56,39 @@ router.get("/blog/:id", async (req, res) => {
 // GET one gallery
 // Use the custom middleware before allowing the user to access the gallery
 router.get("/addcomment/:id", async (req, res) => {
-    try {
-     var comment=new Comment();
-     comment.blog_id=req.params.id;
-     console.log(req.params.id);
-           res.render("comment", { blog_id:req.params.id, logged_in: req.session.logged_in });
-    } catch (err) {
-      console.log(err);
-      res.status(500).json(err);
-    }
-  });
-  
-  router.get("/addblog", async (req, res) => {
-    try {
-    
-           res.render("addBlog", {  logged_in: req.session.logged_in });
-    } catch (err) {
-      console.log(err);
-      res.status(500).json(err);
-    }
-  });
-  
+  try {
+    var comment = new Comment();
+    comment.blog_id = req.params.id;
+    console.log(req.params.id);
+    res.render("comment", {
+      blog_id: req.params.id,
+      logged_in: req.session.logged_in,
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
+
+router.get("/editBlog/:id", async (req, res) => {
+  try {
+    const dbblogData = await Blog.findByPk(req.params.id, {});
+    const blog = dbblogData.get({ plain: true });
+    res.render("editBlog", { blog, logged_in: req.session.logged_in });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
+router.get("/addblog", async (req, res) => {
+  try {
+    res.render("addBlog", { logged_in: req.session.logged_in });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
+
 router.get("/dashboard", withAuth, async (req, res) => {
   try {
     // Get all blog and JOIN with user data
