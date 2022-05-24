@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const { Blog } = require("../../models");
 
+//Update blog method
 router.put("/", async (req, res) => {
   try {
     const blogData = await Blog.update(
@@ -10,7 +11,7 @@ router.put("/", async (req, res) => {
         content: req.body.content,
       },
       {
-        // Gets a book based on the book_id given in the request parameters
+        // Gets a blog based on the id given in the body
         where: {
           id: req.body.id,
         },
@@ -22,6 +23,8 @@ router.put("/", async (req, res) => {
     res.status(400).json(err);
   }
 });
+
+//Add new blog method
 router.post("/", async (req, res) => {
   try {
     const blogData = await Blog.create({

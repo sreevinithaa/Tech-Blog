@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const { Comment } = require('../../models');
 
+//Add new comment method
 router.post('/', async (req, res) => {
     try {
       

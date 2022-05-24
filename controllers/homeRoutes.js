@@ -2,6 +2,7 @@ const router = require("express").Router();
 const { Comment, Blog, User } = require("../models");
 const withAuth = require("../utils/auth");
 
+//Get all blogs for view
 router.get("/", async (req, res) => {
   try {
     // Get all blog and JOIN with user data
@@ -27,8 +28,8 @@ router.get("/", async (req, res) => {
   }
 });
 
-// GET one gallery
-// Use the custom middleware before allowing the user to access the gallery
+// GET one blog
+// Use the custom middleware before allowing the user to access the blog
 router.get("/blog/:id", async (req, res) => {
   try {
     const dbblogData = await Blog.findByPk(req.params.id, {
@@ -53,13 +54,12 @@ router.get("/blog/:id", async (req, res) => {
   }
 });
 
-// GET one gallery
-// Use the custom middleware before allowing the user to access the gallery
+// add comment functionalit
 router.get("/addcomment/:id", async (req, res) => {
   try {
     var comment = new Comment();
     comment.blog_id = req.params.id;
-    console.log(req.params.id);
+    
     res.render("comment", {
       blog_id: req.params.id,
       logged_in: req.session.logged_in,
@@ -70,6 +70,7 @@ router.get("/addcomment/:id", async (req, res) => {
   }
 });
 
+//get blog for edit functionality
 router.get("/editBlog/:id", async (req, res) => {
   try {
     const dbblogData = await Blog.findByPk(req.params.id, {});
@@ -80,6 +81,8 @@ router.get("/editBlog/:id", async (req, res) => {
     res.status(500).json(err);
   }
 });
+
+//render add blog page
 router.get("/addblog", async (req, res) => {
   try {
     res.render("addBlog", { logged_in: req.session.logged_in });
@@ -89,6 +92,7 @@ router.get("/addblog", async (req, res) => {
   }
 });
 
+//get blogs for logged in user
 router.get("/dashboard", withAuth, async (req, res) => {
   try {
     // Get all blog and JOIN with user data
@@ -117,6 +121,7 @@ router.get("/dashboard", withAuth, async (req, res) => {
   }
 });
 
+//render login page if not logged in
 router.get("/login", (req, res) => {
   // If the user is already logged in, redirect the request to another route
   if (req.session.logged_in) {
@@ -126,6 +131,8 @@ router.get("/login", (req, res) => {
 
   res.render("login");
 });
+
+//logout functionality
 router.get("/logout", (req, res) => {
   // If the user is already logged in, redirect the request to another route
   if (req.session.logged_in) {

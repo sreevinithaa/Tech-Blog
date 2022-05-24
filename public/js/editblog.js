@@ -9,7 +9,7 @@ const EditblogFormHandler = async (event) => {
    
      if (title && content&&id) {
         
-       // Send a POST request to the API endpoint
+       // Send a Put request to the API endpoint
        const response = await fetch('/api/blog/', {
          method: 'PUT',
          body: JSON.stringify({ title, content,id }),

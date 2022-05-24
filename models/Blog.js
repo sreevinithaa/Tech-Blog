@@ -1,9 +1,11 @@
 const { Model, DataTypes } = require("sequelize");
 
 const sequelize = require("../config/connection");
+// Create a new Sequelize model for Blog
 class Blog extends Model {}
 Blog.init(
   {
+     // define columns
     id: {
       type: DataTypes.INTEGER,
       allowNull: false,
