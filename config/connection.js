@@ -2,16 +2,16 @@ const Sequelize = require('sequelize');
 require('dotenv').config();
 
 let sequelize;
-//database connection details from environmental variable
+//database connection
 if (process.env.JAWSDB_URL) {
   sequelize = new Sequelize(process.env.JAWSDB_URL);
 } else {
   sequelize = new Sequelize(
-    'sql6494872',
-    'sql6494872',
-    'h4twgdLBjf',
+    process.env.DB_NAME,
+    process.env.DB_USER,
+    process.env.DB_PASSWORD,
     {
-      host: 'sql6.freemysqlhosting.net',
+      host: 'localhost',
       dialect: 'mysql',
       port: 3306
     }
