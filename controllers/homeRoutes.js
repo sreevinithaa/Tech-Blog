@@ -47,7 +47,8 @@ router.get("/blog/:id", async (req, res) => {
     });
     const isEdit = dbblogData.created_by == req.session.user_id;
     const blog = dbblogData.get({ plain: true });
-    res.render("blog", { blog, isEdit, logged_in: req.session.logged_in });
+    const auserid=req.session.user_id;
+    res.render("blog", { blog, isEdit,auserid, logged_in: req.session.logged_in });
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
@@ -81,6 +82,7 @@ router.get("/editBlog/:id", async (req, res) => {
     res.status(500).json(err);
   }
 });
+
 
 //render add blog page
 router.get("/addblog", async (req, res) => {

@@ -16,5 +16,37 @@ router.post('/', async (req, res) => {
       res.status(400).json(err);
     }
   });
+  //Update comment method
+router.put('/', async (req, res) => {
+  try {
+    
+    const commentData = await Comment.update({
+      comment_content:req.body.comment,
+      
+    },
+    {
+      // Gets a blog based on the id given in the body
+      where: {
+        id: req.body.id,
+      },
+    });
+
+    res.status(200).json(commentData);
+  } catch (err) {
+    res.status(400).json(err);
+  }
+});
+//delete comment method
+router.delete("/:id", async (req, res) => {
+  try {
+    const dbblogData = await Comment.destroy({where: {
+      id: req.params.id,
+    }});
+
+    res.status(200).json(dbblogData);
+  } catch (err) {
+    res.status(400).json(err);
+  }
+});
 
   module.exports = router;

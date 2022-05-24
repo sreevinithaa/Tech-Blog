@@ -3,7 +3,9 @@
   {{#if isEdit}}
   <a type="button" href="/editBlog/{{blog.id}}" class="btn bgcolor_2 text-light m-2" >
 <i class="bi bi-pencil-fill"></i> Edit Blog
-</a>
+</a><button data-id="{{{blog.id}}}" id="btndelete" class="btn bgcolor_2 text-light m-2"><i class="bi bi-trash3-fill"></i> Delete Blog</button>  
+
+
 {{/if}}
 <a type="button" href="/addcomment/{{blog.id}}" class="btn bgcolor_2 text-light" >
  <i class="bi bi-plus-circle-fill"></i> New Comment
@@ -31,6 +33,10 @@
     <div class="card-body">
       <blockquote class="blockquote mb-0">
         <p> {{comment.comment_content}}</p>
+         {{#if (IsEdual comment.created_by ../auserid) }}
+        <div class="post_by"><a href="" class="text-light"><i class=" bi bi-pencil-fill bgcolor_2 p-2 m-2"></i></a><a class=" text-light" id="deletecomment" type="button"><i data-id="{{{comment.id}}}" class=" bi bi-trash3-fill bgcolor_2 p-2"></i></a></div>
+
+{{/if}}
         <footer class="blockquote-footer">
           Comment by
           <cite title="Source Title">{{comment.user.name}} </cite></footer>
@@ -40,3 +46,4 @@
   {{/each}}
 
 </div>
+  <script src="../js/deleteBlog.js"></script> 

@@ -24,6 +24,19 @@ router.put("/", async (req, res) => {
   }
 });
 
+//delete blog method
+router.delete("/:id", async (req, res) => {
+  try {
+    const dbblogData = await Blog.destroy({where: {
+      id: req.params.id,
+    }});
+
+    res.status(200).json(dbblogData);
+  } catch (err) {
+    res.status(400).json(err);
+  }
+});
+
 //Add new blog method
 router.post("/", async (req, res) => {
   try {

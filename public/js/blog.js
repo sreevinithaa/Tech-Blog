@@ -19,12 +19,12 @@ const AddblogFormHandler = async (event) => {
          // If successful, redirect the browser to the profile page
          document.location.replace('/');
        } else {
-         alert(response.statusText);
+        alert('Failed to create blog');
        }
      }
    };
  
-  
+   
    document
      .querySelector('.blog-form')
      .addEventListener('submit', AddblogFormHandler);

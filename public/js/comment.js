@@ -1,5 +1,5 @@
 const AddCommentFormHandler = async (event) => {
-   console.log("succ");
+  
     event.preventDefault();
   
     // Collect values from the login form
@@ -7,7 +7,7 @@ const AddCommentFormHandler = async (event) => {
     const blog_id = document.querySelector('#blog_id').value;
   
     if (comment && blog_id) {
-        console.log("succ3");
+      
       // Send a POST request to the API endpoint
       const response = await fetch('/api/comment/', {
         method: 'POST',
@@ -24,7 +24,7 @@ const AddCommentFormHandler = async (event) => {
     }
   };
 
-  console.log("succ1");
+
   document
     .querySelector('.comment-form')
     .addEventListener('submit', AddCommentFormHandler);
