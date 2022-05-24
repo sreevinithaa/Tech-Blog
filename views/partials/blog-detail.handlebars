@@ -1,7 +1,14 @@
+
+
 <a href="/blog/{{id}}" class="nav-link text-light">
-<div class="bgcolor_2 text-light p-3 rounded row ">
-    <div class="col-9">{{title}}</div>
-    <div class="col-3"><span>posted by : {{user.name}} on {{format_date createdAt}}</span> </div>
-    </div>
+<div class="card mb-1 p-1 bgcolor_2">
+  <h5 class="card-header  text-light">{{title}} </h5>
+  <footer class="blockquote-footer post_by"><cite title="Source Title">Post by
+      {{user.name}}
+      on
+      {{format_date createdAt}}</cite>
+  </footer>
+ 
+</div>
 
 </a>
