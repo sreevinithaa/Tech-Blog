@@ -1,15 +1,15 @@
 
 {{#if logged_in}} <div class="post_by">
   {{#if isEdit}}
-  <a type="button" href="/editBlog/{{blog.id}}" class="btn bgcolor_1 text-light m-2" >
+  <a type="button" href="/editBlog/{{blog.id}}" class="btn bgcolor_2 text-light m-2" >
 <i class="bi bi-pencil-fill"></i> Edit Blog
 </a>
 {{/if}}
-<a type="button" href="/addcomment/{{blog.id}}" class="btn bgcolor_1 text-light" >
+<a type="button" href="/addcomment/{{blog.id}}" class="btn bgcolor_2 text-light" >
  <i class="bi bi-plus-circle-fill"></i> New Comment
 </a></div> {{/if}}
 <div class="card mb-3">
-  <h5 class="card-header bgcolor_2 text-light">{{blog.title}} </h5>
+  <h5 class="card-header bgcolor_3 text-light">{{blog.title}} </h5>
   <footer class="blockquote-footer post_by"><cite title="Source Title">Post by
       {{blog.user.name}}
       on
