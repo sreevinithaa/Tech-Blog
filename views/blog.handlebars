@@ -34,7 +34,7 @@
       <blockquote class="blockquote mb-0">
         <p> {{comment.comment_content}}</p>
          {{#if (IsEdual comment.created_by ../auserid) }}
-        <div class="post_by"><a href="" class="text-light"><i class=" bi bi-pencil-fill bgcolor_2 p-2 m-2"></i></a><a class=" text-light" id="deletecomment" type="button"><i data-id="{{{comment.id}}}" class=" bi bi-trash3-fill bgcolor_2 p-2"></i></a></div>
+        <div class="post_by"><a href="/comment/{{{comment.id}}}" class="text-light"><i class=" bi bi-pencil-fill bgcolor_2 p-2 m-2"></i></a><a class=" text-light" id="deletecomment" type="button"><i data-id="{{{comment.id}}}" class=" bi bi-trash3-fill bgcolor_2 p-2"></i></a></div>
 
 {{/if}}
         <footer class="blockquote-footer">

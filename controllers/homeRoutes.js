@@ -71,6 +71,20 @@ router.get("/addcomment/:id", async (req, res) => {
   }
 });
 
+//get comment for update
+router.get("/comment/:id", async (req, res) => {
+  try {
+    var comments = await Comment.findByPk(req.params.id);
+    const comment = comments.get({ plain: true });
+    res.render("editComment", {
+      comment,
+      logged_in: req.session.logged_in,
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
 //get blog for edit functionality
 router.get("/editBlog/:id", async (req, res) => {
   try {

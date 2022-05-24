@@ -1,0 +1,21 @@
+    <div class="bgcolor_3 text-light border rounded p-2"><h6>Edit Comment</h6></div>
+    <form class="comment-edit-form">
+      <div class="form-group p-2">
+       
+        <input
+          type="text"
+          class="form-control"
+          id="comment"
+          value="{{{comment.comment_content}}}"
+          placeholder="Enter comment"
+        />
+<input type="hidden" id="id" value="{{{comment.id}}}">
+      </div>
+     
+      <div class="form-group p-2">
+        <button type="submit" class="btn bgcolor_2 text-light">Submit</button></div>
+
+    </form>
+
+  </div>
+  <script src="../js/comment.js"></script> 
