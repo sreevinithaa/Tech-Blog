@@ -67,7 +67,16 @@ router.get("/addcomment/:id", async (req, res) => {
     }
   });
   
-
+  router.get("/addblog", async (req, res) => {
+    try {
+    
+           res.render("addBlog", {  logged_in: req.session.logged_in });
+    } catch (err) {
+      console.log(err);
+      res.status(500).json(err);
+    }
+  });
+  
 router.get("/dashboard", withAuth, async (req, res) => {
   try {
     // Get all blog and JOIN with user data
