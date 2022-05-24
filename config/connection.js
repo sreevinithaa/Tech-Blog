@@ -7,11 +7,11 @@ if (process.env.JAWSDB_URL) {
   sequelize = new Sequelize(process.env.JAWSDB_URL);
 } else {
   sequelize = new Sequelize(
-    'heroku_7643ec736354xxx',
-    'b7e2437887xxxa',
-    '0200xxx6',
+    'sql6494872',
+    'sql6494872',
+    'h4twgdLBjf',
     {
-      host: 'us-cdbr-iron-east-02.cleardb.net',
+      host: 'sql6.freemysqlhosting.net',
       dialect: 'mysql',
       port: 3306
     }
